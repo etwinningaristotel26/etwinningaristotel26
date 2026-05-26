@@ -96,512 +96,71 @@
     }
 </script>
     <title>eTwinning Aristotel '26 - TwinSpace</title>
-    <!-- Simple Analytics Tracker -->
     <script async src="https://cloud.umami.is/script.js" data-website-id="8bf95060-8550-4fb9-9c1d-c17624d0c0ab" data-do-not-track="false"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            transition: all 0.3s ease;
-        }
-
-        /* Light Theme (Default) */
-        :root {
-            --bg-primary: #f8fafc;
-            --bg-secondary: white;
-            --bg-card: white;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border: #e2e8f0;
-            --sidebar-bg: white;
-            --header-bg: #1e3a8a;
-            --footer-bg: #1e293b;
-            --hover-bg: #f1f5f9;
-            --active-bg: #1e40af;
-            --scroll-bar: #e2e8f0;
-        }
-
-        /* Dark Theme */
-        body.dark {
-            --bg-primary: #1e293b;
-            --bg-secondary: #334155;
-            --bg-card: #0f172a;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border: #334155;
-            --sidebar-bg: #1e293b;
-            --header-bg: #1e1b4b;
-            --footer-bg: #0f0f23;
-            --hover-bg: #334155;
-            --active-bg: #3b82f6;
-            --scroll-bar: #475569;
-        }
-
-        .header {
-            background: var(--header-bg);
-            color: white;
-            padding: 1rem 2rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 60px;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .logo {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        .header-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: white;
-        }
-
-        .theme-toggle {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1.25rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-        }
-
-        .theme-toggle:hover {
-            background: var(--hover-bg);
-        }
-
-        .main-wrapper {
-            display: flex;
-            margin-top: 60px;
-            min-height: calc(100vh - 140px);
-        }
-
-        .sidebar {
-            width: 340px;
-            background: var(--sidebar-bg);
-            box-shadow: 4px 0 20px rgba(0,0,0,0.08);
-            position: fixed;
-            top: 60px;
-            left: 0;
-            bottom: 80px;
-            z-index: 100;
-            overflow-y: auto;
-            border-right: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-header {
-            padding: 2.5rem 1.5rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            background: var(--sidebar-bg);
-            z-index: 10;
-        }
-
-        .sidebar-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .sidebar-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .nav-item {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            padding: 1rem 1.5rem 0.75rem;
-            border-bottom: 2px solid var(--active-bg);
-            cursor: pointer;
-            transition: all 0.3s;
-            user-select: none;
-            display: block;
-            width: 100%;
-            background: none;
-            border: none;
-            text-align: left;
-        }
-
-        .nav-title:hover {
-            background: var(--hover-bg);
-            padding-left: 2rem;
-        }
-
-        .nav-title.active {
-            background: var(--active-bg);
-            color: white;
-        }
-
-        .topics-list {
-            list-style: none;
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-item.open .topics-list {
-            max-height: 2000px;
-        }
-
-        .topic-item {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .topic-button {
-            width: 100%;
-            padding: 1.25rem 1.5rem;
-            background: none;
-            border: none;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            transition: all 0.3s;
-        }
-
-        .topic-button:hover {
-            background: var(--hover-bg);
-            color: var(--active-bg);
-            padding-left: 2rem;
-        }
-
-        .topic-button.active {
-            background: var(--active-bg);
-            color: white;
-        }
-
-        .topic-arrow {
-            transition: transform 0.3s;
-            width: 16px;
-            height: 16px;
-            stroke-width: 2;
-            stroke: currentColor;
-        }
-
-        .topic-item.open .topic-arrow {
-            transform: rotate(180deg);
-        }
-
-        .teams-list {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--hover-bg);
-        }
-
-        .topic-item.open .teams-list {
-            max-height: 800px;
-        }
-
-        .team-item {
-            padding: 0.875rem 2.5rem 0.875rem 3.25rem;
-            border-left: 3px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .team-item:hover {
-            background: var(--bg-secondary);
-            border-left-color: var(--active-bg);
-            transform: translateX(4px);
-        }
-
-        .scroll-indicator {
-            position: fixed;
-            top: 60px;
-            right: 0;
-            bottom: 80px;
-            width: 4px;
-            background: var(--scroll-bar);
-            z-index: 200;
-        }
-
-        .scroll-progress {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--active-bg);
-            width: 100%;
-            transition: height 0.1s;
-        }
-
-        .content-wrapper {
-            margin-left: 340px;
-            margin-top: 60px;
-            padding: 3rem 2.5rem 4rem;
-            flex: 1;
-            overflow-y: auto;
-            min-height: calc(100vh - 140px);
-            background: var(--bg-primary);
-        }
-
-        .content-placeholder {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            max-width: 1000px;
-            margin: 0 auto;
-            border: 1px solid var(--border);
-        }
-
-        .content-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .content-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .member-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.75rem;
-            transition: all 0.3s;
-        }
-
-        .member-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            border-color: var(--active-bg);
-        }
-
-        .member-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .member-role {
-            color: var(--active-bg);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .materials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .material-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.75rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .material-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            border-color: var(--active-bg);
-        }
-
-        .material-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            display: block;
-        }
-
-        .material-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .material-desc {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .video-preview iframe {
-            width: 100%;
-            height: 200px;
-            border: none;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
-            padding: 1.5rem 1rem 1rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .lightbox-img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .footer {
-            background: var(--footer-bg);
-            color: #cbd5e1;
-            padding: 1.5rem 2rem;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border);
-        }
-
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .content-wrapper {
-                margin-left: 0;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; transition: all 0.3s ease; }
+        :root { --bg-primary: #f8fafc; --bg-secondary: white; --bg-card: white; --text-primary: #1e293b; --text-secondary: #64748b; --border: #e2e8f0; --sidebar-bg: white; --header-bg: #1e3a8a; --footer-bg: #1e293b; --hover-bg: #f1f5f9; --active-bg: #1e40af; --scroll-bar: #e2e8f0; }
+        body.dark { --bg-primary: #1e293b; --bg-secondary: #334155; --bg-card: #0f172a; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --border: #334155; --sidebar-bg: #1e293b; --header-bg: #1e1b4b; --footer-bg: #0f0f23; --hover-bg: #334155; --active-bg: #3b82f6; --scroll-bar: #475569; }
+        .header { background: var(--header-bg); color: white; padding: 1rem 2rem; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 60px; }
+        .logo-section { display: flex; align-items: center; gap: 1rem; cursor: pointer; }
+        .logo { width: 48px; height: 48px; object-fit: contain; border-radius: 8px; }
+        .header-title { font-size: 1.4rem; font-weight: 600; color: white; }
+        .theme-toggle { background: var(--bg-secondary); border: 1px solid var(--border); padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer; font-weight: 500; color: var(--text-primary); }
+        .sidebar { width: 340px; background: var(--sidebar-bg); box-shadow: 4px 0 20px rgba(0,0,0,0.08); position: fixed; top: 60px; left: 0; bottom: 80px; z-index: 100; overflow-y: auto; border-right: 1px solid var(--border); }
+        .sidebar-header { padding: 2.5rem 1.5rem 1.5rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--sidebar-bg); }
+        .sidebar-title { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .sidebar-subtitle { color: var(--text-secondary); font-size: 0.9rem; }
+        .nav-item { border-bottom: 1px solid var(--border); }
+        .nav-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); padding: 1rem 1.5rem 0.75rem; border-bottom: 2px solid var(--active-bg); cursor: pointer; transition: all 0.3s; display: block; width: 100%; background: none; border: none; text-align: left; }
+        .nav-title:hover { background: var(--hover-bg); padding-left: 2rem; }
+        .nav-title.active { background: var(--active-bg); color: white; }
+        .topics-list { list-style: none; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nav-item.open .topics-list { max-height: 2000px; }
+        .topic-item { border-bottom: 1px solid var(--border); }
+        .topic-button { width: 100%; padding: 1.25rem 1.5rem; background: none; border: none; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 500; color: var(--text-primary); transition: all 0.3s; }
+        .topic-button:hover { background: var(--hover-bg); color: var(--active-bg); padding-left: 2rem; }
+        .topic-button.active { background: var(--active-bg); color: white; }
+        .topic-arrow { transition: transform 0.3s; width: 16px; height: 16px; stroke-width: 2; stroke: currentColor; }
+        .topic-item.open .topic-arrow { transform: rotate(180deg); }
+        .teams-list { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); background: var(--hover-bg); }
+        .topic-item.open .teams-list { max-height: 800px; }
+        .team-item { padding: 0.875rem 2.5rem 0.875rem 3.25rem; border-left: 3px solid transparent; cursor: pointer; transition: all 0.2s; font-weight: 500; color: var(--text-primary); }
+        .team-item:hover { background: var(--bg-secondary); border-left-color: var(--active-bg); transform: translateX(4px); }
+        .scroll-indicator { position: fixed; top: 60px; right: 0; bottom: 80px; width: 4px; background: var(--scroll-bar); z-index: 200; }
+        .scroll-progress { position: absolute; top: 0; left: 0; right: 0; background: var(--active-bg); width: 100%; transition: height 0.1s; }
+        .content-wrapper { margin-left: 340px; margin-top: 60px; padding: 3rem 2.5rem 4rem; flex: 1; min-height: calc(100vh - 140px); background: var(--bg-primary); }
+        .content-placeholder { background: var(--bg-card); border-radius: 12px; padding: 3rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); max-width: 1000px; margin: 0 auto; border: 1px solid var(--border); }
+        .content-title { font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; }
+        .content-subtitle { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 2rem; }
+        .members-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .member-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; transition: all 0.3s; }
+        .member-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-color: var(--active-bg); }
+        .member-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .member-role { color: var(--active-bg); font-weight: 600; margin-bottom: 0.5rem; }
+        .member-date { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .member-school { font-weight: 500; font-size: 0.9rem; }
+        .member-location { color: var(--text-secondary); font-size: 0.85rem; }
+        .materials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .material-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; cursor: pointer; transition: all 0.3s; }
+        .material-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-color: var(--active-bg); }
+        .material-icon { font-size: 2.5rem; margin-bottom: 1rem; text-align: center; display: block; }
+        .material-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .material-desc { color: var(--text-secondary); font-size: 0.95rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .gallery-item { position: relative; aspect-ratio: 1; border-radius: 12px; overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0; transform: translateY(30px); }
+        .gallery-item:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 25px 50px rgba(0,0,0,0.2); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 1.5rem 1rem 1rem; transform: translateY(100%); transition: transform 0.3s ease; }
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center; z-index: 5000; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .lightbox.active { opacity: 1; visibility: visible; }
+        .lightbox-img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+        .lightbox-close { position: absolute; top: 2rem; right: 2rem; background: rgba(255,255,255,0.2); border: none; color: white; width: 44px; height: 44px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; }
+        .footer { background: var(--footer-bg); color: #cbd5e1; padding: 1.5rem 2rem; position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; font-size: 0.9rem; border-top: 1px solid var(--border); }
+        @media (max-width: 1024px) { .sidebar { transform: translateX(-100%); } .content-wrapper { margin-left: 0; } }
     </style>
 </head>
 <body>
@@ -614,67 +173,50 @@
             <button class="theme-toggle" id="themeToggle">Dark</button>
         </div>
     </header>
-
-    <div class="scroll-indicator">
-        <div class="scroll-progress" id="scrollProgress"></div>
-    </div>
-
+    <div class="scroll-indicator"><div class="scroll-progress" id="scrollProgress"></div></div>
     <aside class="sidebar">
-        <div class="sidebar-header">
-            <h2 class="sidebar-title">Navigation</h2>
-            <p class="sidebar-subtitle">eTwinning Project</p>
-        </div>
-        <div class="nav-item"><button class="nav-title active" onclick="showMainSection('home')">Home</button></div>
+        <div class="sidebar-header"><h2 class="sidebar-title">Navigation</h2><p class="sidebar-subtitle">eTwinning Project</p></div>
+        <div class="nav-item"><button class="nav-title" onclick="showMainSection('home')">Home</button></div>
         <div class="nav-item"><button class="nav-title" onclick="showMainSection('description')">Description</button></div>
         <div class="nav-item"><button class="nav-title" onclick="showMainSection('members')">Members</button></div>
-
         <div class="nav-item">
             <button class="nav-title" data-section="pages">Pages</button>
             <ul class="topics-list" id="pages">
-                <li class="topic-item" data-topic="digital-pact"><button class="topic-button"><span>1 - Our digital pact</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="mixed1" data-type="mixed1">Team 1</li><li class="team-item" data-material="mixed2" data-type="mixed2">Team 2</li><li class="team-item" data-material="mixed3" data-type="mixed3">Team 3</li><li class="team-item" data-material="mixed4" data-type="mixed4">Team 4</li></ul></li>
-                <li class="topic-item" data-topic="international-groups"><button class="topic-button"><span>2 - Our international groups</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="groups" data-type="groups">View All Teams (7 groups)</li></ul></li>
-                <li class="topic-item" data-topic="suffragette"><button class="topic-button"><span>3 - Suffragette movie</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="suffragette-team1" data-type="slides">Team 1</li><li class="team-item" data-material="suffragette-team2" data-type="slides">Team 2</li><li class="team-item" data-material="suffragette-team3" data-type="slides">Team 3</li><li class="team-item" data-material="suffragette-team4" data-type="slides">Team 4</li><li class="team-item" data-material="suffragette-team5" data-type="slides">Team 5</li><li class="team-item" data-material="suffragette-team6" data-type="slides">Team 6</li><li class="team-item" data-material="suffragette-team7" data-type="slides">Team 7</li></ul></li>
-                <li class="topic-item" data-topic="xmas"><button class="topic-button"><span>4 - XMas cards</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="xmas" data-type="xmas">XMas Gallery</li></ul></li>
-                <li class="topic-item" data-topic="reenacting"><button class="topic-button"><span>5 - Reenacting the Movie</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="reenact-team1" data-type="reenact-video">Team 1</li><li class="team-item" data-material="reenact-team2" data-type="reenact-video">Team 2</li><li class="team-item" data-material="reenact-team3" data-type="reenact-video">Team 3</li><li class="team-item" data-material="reenact-team4" data-type="reenact-video">Team 4</li><li class="team-item" data-material="reenact-team5" data-type="reenact-video">Team 5</li><li class="team-item" data-material="reenact-team6" data-type="reenact-video">Team 6</li><li class="team-item" data-material="reenact-team7" data-type="reenact-video">Team 7</li></ul></li>
-                <li class="topic-item" data-topic="womens-day"><button class="topic-button"><span>6 - Women's Day</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="womens-team1" data-type="presentation">Team 1</li><li class="team-item" data-material="womens-team2" data-type="presentation">Team 2</li><li class="team-item" data-material="womens-team3" data-type="presentation">Team 3</li><li class="team-item" data-material="womens-team4" data-type="presentation">Team 4</li><li class="team-item" data-material="womens-team5" data-type="presentation">Team 5</li><li class="team-item" data-material="womens-team6" data-type="presentation">Team 6</li><li class="team-item" data-material="womens-team7" data-type="presentation">Team 7</li></ul></li>
-                <li class="topic-item" data-topic="skills"><button class="topic-button"><span>7 - Skills that make a difference</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="topic-item" data-topic="skills-7-1"><button class="topic-button"><span>7.1 Mini Campaign (9 teams)</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="mini-team1" data-type="mini-video">Mini Team 1</li><li class="team-item" data-material="mini-team2" data-type="mini-video">Mini Team 2</li><li class="team-item" data-material="mini-team3" data-type="mini-video">Mini Team 3</li><li class="team-item" data-material="mini-team4" data-type="mini-video">Mini Team 4</li><li class="team-item" data-material="mini-team5" data-type="mini-video">Mini Team 5</li><li class="team-item" data-material="mini-team6" data-type="mini-video">Mini Team 6</li><li class="team-item" data-material="mini-team7" data-type="mini-video">Mini Team 7</li><li class="team-item" data-material="mini-team8" data-type="mini-video">Mini Team 8</li><li class="team-item" data-material="mini-team9" data-type="mini-video">Mini Team 9</li></ul></li><li class="topic-item" data-topic="skills-7-2"><button class="topic-button"><span>7.2 Promoting eTwinning (7 teams)</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="promo-team1" data-type="promo-ebook">Team 1 - eBook</li><li class="team-item" data-material="promo-team2" data-type="promo-video">Team 2 - Video</li><li class="team-item" data-material="promo-team3" data-type="promo-video">Team 3 - Video</li><li class="team-item" data-material="promo-team4" data-type="promo-website">Team 4 - Website</li><li class="team-item" data-material="promo-team5" data-type="promo-vr">Team 5 - VR</li><li class="team-item" data-material="promo-team6" data-type="promo-games">Team 6 - Games</li><li class="team-item" data-material="promo-team7" data-type="promo-infographic">Team 7 - Infographic</li></ul></li></ul></li>
-                <li class="topic-item" data-topic="logo"><button class="topic-button"><span>8 - Project logo</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="logo-team1" data-type="logo">Team 1</li><li class="team-item" data-material="logo-team2" data-type="logo">Team 2</li><li class="team-item" data-material="logo-team3" data-type="logo">Team 3</li><li class="team-item" data-material="logo-team4" data-type="logo">Team 4</li><li class="team-item" data-material="logo-team5" data-type="logo">Team 5</li><li class="team-item" data-material="logo-team6" data-type="logo">Team 6</li><li class="team-item" data-material="logo-team7" data-type="logo">Team 7</li></ul></li>
-                <li class="topic-item" data-topic="etwinning-day"><button class="topic-button"><span>9 - eTwinning Day</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="etwinning-day-team1" data-type="etwinning-team1">Team 1</li><li class="team-item" data-material="etwinning-day-team2" data-type="etwinning-team2">Team 2</li><li class="team-item" data-material="etwinning-day-team3" data-type="etwinning-team3">Team 3</li><li class="team-item" data-material="etwinning-day-team4" data-type="unavailable">Team 4 (unavailable)</li><li class="team-item" data-material="etwinning-day-team5" data-type="etwinning-team5">Team 5</li><li class="team-item" data-material="etwinning-day-team6" data-type="etwinning-team6">Team 6</li><li class="team-item" data-material="etwinning-day-team7" data-type="unavailable">Team 7 (unavailable)</li></ul></li>
-                <li class="topic-item" data-topic="online-conference"><button class="topic-button"><span>10 - Online Conference</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="conference" data-type="conference-screenshots">Conference Materials</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>1 - Our digital pact: rules, rights & responsibilities</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="mixed1" data-type="mixed1">Team 1</li><li class="team-item" data-material="mixed2" data-type="mixed2">Team 2</li><li class="team-item" data-material="mixed3" data-type="mixed3">Team 3</li><li class="team-item" data-material="mixed4" data-type="mixed4">Team 4</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>2 - Our international groups</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="group1" data-type="group1">Group 1</li><li class="team-item" data-material="group2" data-type="group2">Group 2</li><li class="team-item" data-material="group3" data-type="group3">Group 3</li><li class="team-item" data-material="group4" data-type="group4">Group 4</li><li class="team-item" data-material="group5" data-type="group5">Group 5</li><li class="team-item" data-material="group6" data-type="group6">Group 6</li><li class="team-item" data-material="group7" data-type="group7">Group 7</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>3 - Watching and studying the movie Suffragette</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="suffragette-team1" data-type="slides">Team 1</li><li class="team-item" data-material="suffragette-team2" data-type="slides">Team 2</li><li class="team-item" data-material="suffragette-team3" data-type="slides">Team 3</li><li class="team-item" data-material="suffragette-team4" data-type="slides">Team 4</li><li class="team-item" data-material="suffragette-team5" data-type="slides">Team 5</li><li class="team-item" data-material="suffragette-team6" data-type="slides">Team 6</li><li class="team-item" data-material="suffragette-team7" data-type="slides">Team 7</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>4 - XMas cards</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="xmas" data-type="xmas">XMas Gallery</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>5 - Reenacting the Movie</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="reenact-team1" data-type="reenact-video">Team 1</li><li class="team-item" data-material="reenact-team2" data-type="reenact-video">Team 2</li><li class="team-item" data-material="reenact-team3" data-type="reenact-video">Team 3</li><li class="team-item" data-material="reenact-team4" data-type="reenact-video">Team 4</li><li class="team-item" data-material="reenact-team5" data-type="reenact-video">Team 5</li><li class="team-item" data-material="reenact-team6" data-type="reenact-video">Team 6</li><li class="team-item" data-material="reenact-team7" data-type="reenact-video">Team 7</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>6 - International Women's Day</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="womens-team1" data-type="presentation">Team 1</li><li class="team-item" data-material="womens-team2" data-type="presentation">Team 2</li><li class="team-item" data-material="womens-team3" data-type="presentation">Team 3</li><li class="team-item" data-material="womens-team4" data-type="presentation">Team 4</li><li class="team-item" data-material="womens-team5" data-type="presentation">Team 5</li><li class="team-item" data-material="womens-team6" data-type="presentation">Team 6</li><li class="team-item" data-material="womens-team7" data-type="presentation">Team 7</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>7 - Skills that make a difference</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="topic-item"><button class="topic-button"><span>7.1 Mini Campaign (9 teams)</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="mini-team1" data-type="mini-video">Mini Team 1</li><li class="team-item" data-material="mini-team2" data-type="mini-video">Mini Team 2</li><li class="team-item" data-material="mini-team3" data-type="mini-video">Mini Team 3</li><li class="team-item" data-material="mini-team4" data-type="mini-video">Mini Team 4</li><li class="team-item" data-material="mini-team5" data-type="mini-video">Mini Team 5</li><li class="team-item" data-material="mini-team6" data-type="mini-video">Mini Team 6</li><li class="team-item" data-material="mini-team7" data-type="mini-video">Mini Team 7</li><li class="team-item" data-material="mini-team8" data-type="mini-video">Mini Team 8</li><li class="team-item" data-material="mini-team9" data-type="mini-video">Mini Team 9</li></ul></li><li class="topic-item"><button class="topic-button"><span>7.2 Promoting eTwinning (7 teams)</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="promo-team1" data-type="promo-ebook">Team 1 - eBook</li><li class="team-item" data-material="promo-team2" data-type="promo-video">Team 2 - Video</li><li class="team-item" data-material="promo-team3" data-type="promo-video">Team 3 - Video</li><li class="team-item" data-material="promo-team4" data-type="promo-website">Team 4 - Website</li><li class="team-item" data-material="promo-team5" data-type="promo-vr">Team 5 - VR</li><li class="team-item" data-material="promo-team6" data-type="promo-games">Team 6 - Games</li><li class="team-item" data-material="promo-team7" data-type="promo-infographic">Team 7 - Infographic</li></ul></li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>8 - Project logo</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="logo-team1" data-type="logo">Team 1</li><li class="team-item" data-material="logo-team2" data-type="logo">Team 2</li><li class="team-item" data-material="logo-team3" data-type="logo">Team 3</li><li class="team-item" data-material="logo-team4" data-type="logo">Team 4</li><li class="team-item" data-material="logo-team5" data-type="logo">Team 5</li><li class="team-item" data-material="logo-team6" data-type="logo">Team 6</li><li class="team-item" data-material="logo-team7" data-type="logo">Team 7</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>9 - eTwinning Day</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="etwinning-day-team1" data-type="etwinning-team1">Team 1</li><li class="team-item" data-material="etwinning-day-team2" data-type="etwinning-team2">Team 2</li><li class="team-item" data-material="etwinning-day-team3" data-type="etwinning-team3">Team 3</li><li class="team-item" data-material="etwinning-day-team4" data-type="unavailable">Team 4 (unavailable)</li><li class="team-item" data-material="etwinning-day-team5" data-type="etwinning-team5">Team 5</li><li class="team-item" data-material="etwinning-day-team6" data-type="etwinning-team6">Team 6</li><li class="team-item" data-material="etwinning-day-team7" data-type="unavailable">Team 7 (unavailable)</li></ul></li>
+                <li class="topic-item"><button class="topic-button"><span>10 - Online Conference</span><svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg></button><ul class="teams-list"><li class="team-item" data-material="conference" data-type="conference-screenshots">Conference Materials</li></ul></li>
             </ul>
         </div>
         <div class="nav-item"><button class="nav-title" onclick="showGallery()">Gallery</button></div>
     </aside>
-
-    <div class="content-wrapper">
-        <div class="content-placeholder" id="contentArea">
-            <h1 class="content-title">Welcome to eTwinning Aristotel '26</h1>
-            <p class="content-subtitle">European School Education Platform - TwinSpace Navigation</p>
-        </div>
-    </div>
-
+    <div class="content-wrapper"><div class="content-placeholder" id="contentArea"><h1 class="content-title">Welcome to eTwinning Aristotel '26</h1><p class="content-subtitle">European School Education Platform - TwinSpace Navigation</p></div></div>
     <div class="lightbox" id="lightbox"><button class="lightbox-close">&times;</button><img id="lightbox-img" src="" alt="Gallery Image"></div>
     <footer class="footer"><div>&copy; 2025 eTwinning Aristotel '26 | European School Education Platform | All rights reserved</div></footer>
-
     <script>
         let currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') { document.body.classList.add('dark'); document.getElementById('themeToggle').textContent = 'Light'; }
-        document.getElementById('themeToggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark');
-            currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
-            this.textContent = currentTheme === 'dark' ? 'Light' : 'Dark';
-            localStorage.setItem('theme', currentTheme);
-        });
-
+        document.getElementById('themeToggle').addEventListener('click', function() { document.body.classList.toggle('dark'); currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light'; this.textContent = currentTheme === 'dark' ? 'Light' : 'Dark'; localStorage.setItem('theme', currentTheme); });
+        
         function showMainSection(section) {
+            document.querySelectorAll('.nav-title').forEach(t => t.classList.remove('active'));
+            if(section === 'home') document.querySelector('.nav-item .nav-title')?.classList.add('active');
+            else if(section === 'description') document.querySelectorAll('.nav-item .nav-title')[1]?.classList.add('active');
+            else if(section === 'members') document.querySelectorAll('.nav-item .nav-title')[2]?.classList.add('active');
             const content = {
-                home: `<div style="text-align:center;margin-bottom:3rem;padding:2rem;background:var(--hover-bg);border-radius:16px;"><h1 class="content-title">Welcome to eTwinning Aristotel '26</h1><p class="content-subtitle"><strong>Made by Team 4 from Aristotel Republican Theoretical Lyceum</strong><br>eTwinning 2025-2026 - English Project</p><p>Use sidebar on the left to explore all sections.</p></div>`,
-                description: `<h1 class="content-title">The power of S.H.E. - Strength, Hope and Equality</h1><img src="description.png" style="width:100%;max-width:400px;border-radius:12px;margin:1rem 0;"><p>Year-long international eTwinning project exploring women's rights, activism, and representation in cinema.</p>`,
-                members: `<h1 class="content-title">Members (8)</h1><div class="members-grid">${['Aliona Meriacre','Hasibe Yalçınkaya','diana iervolino','Mathilde Bertaso','Anila Hoxhaj','Fara Messina','Anna Bukwarow','Nagore Barbero'].map(n=>`<div class="member-card"><div class="member-name">${n}</div><div class="member-role">Member</div></div>`).join('')}</div>`
+                home: `<div style="text-align:center;margin-bottom:3rem;padding:2rem;background:var(--hover-bg);border-radius:16px;border:2px solid var(--border);"><h1 class="content-title" style="margin-bottom:1rem;">Welcome to eTwinning Aristotel '26</h1><p class="content-subtitle" style="font-size:1.3rem;"><strong>Made by Team 4 from Aristotel Republican Theoretical Lyceum</strong><br>eTwinning 2025-2026 - English Project</p><p style="font-size:1.1rem;">To continue browsing use the sidebar on the left. Please be aware that this site is only for PCs.</p></div><div style="display:grid;grid-template-columns:1fr 350px;gap:3rem;"><div style="background:var(--bg-card);padding:2rem;border-radius:20px;"><div style="background:linear-gradient(135deg,#10b981,#059669);color:white;padding:1rem;border-radius:12px;text-align:center;"><div>PROJECT ● Active</div><h2>The power of S.H.E.</h2><div>Strength, Hope and Equality</div></div><p style="margin-top:1rem;">Year-long international eTwinning project exploring women's rights, activism, and representation in cinema.</p></div><div><img src="description.png" style="width:100%;border-radius:20px;box-shadow:0 25px 80px rgba(0,0,0,0.2);"></div></div>`,
+                description: `<h1 class="content-title">The power of S.H.E. - Strength, Hope and Equality</h1><div style="display:flex;gap:2rem;"><img src="description.png" style="width:300px;border-radius:12px;"><div><p>This is a year-long international eTwinning project (September-May) exploring women's rights, activism, and representation in cinema. Secondary school students work in international groups across 8 European countries.</p><p style="margin-top:1rem;">Some teams have run similar suffragette projects for 2+ years, improving every year!</p></div></div>`,
+                members: `<h1 class="content-title">Members (8)</h1><div class="members-grid"><div class="member-card"><div class="member-name">Aliona Meriacre</div><div class="member-role">Administrator</div><div class="member-date">Last access 29.04.2026</div><div class="member-school">Liceul Teoretic Republican "Aristotel"</div><div class="member-location">Chişinău, Republic of Moldova</div></div><div class="member-card"><div class="member-name">Hasibe Yalçınkaya</div><div class="member-role">Co-founder</div><div class="member-date">Last access 28.04.2026</div><div class="member-school">Hasan Aybaba Anadolu Lisesi</div><div class="member-location">Merkez, Türkiye</div></div><div class="member-card"><div class="member-name">diana iervolino</div><div class="member-role">Administrator</div><div class="member-date">Last access 08.04.2026</div><div class="member-school">IIS "Don L. Milani" di Gragnano</div><div class="member-location">Gragnano (Na), Italy</div></div><div class="member-card"><div class="member-name">Mathilde Bertaso</div><div class="member-role">Founder</div><div class="member-date">Last access 20.04.2026</div><div class="member-school">Lycée Jean Jaurès</div><div class="member-location">Reims, France</div></div><div class="member-card"><div class="member-name">Anila Hoxhaj</div><div class="member-role">Administrator</div><div class="member-date">Last access 28.04.2026</div><div class="member-school">"Kostandin Kristoforidhi"</div><div class="member-location">Tiranë, Albania</div></div><div class="member-card"><div class="member-name">Fara Messina</div><div class="member-role">Administrator</div><div class="member-date">Last access 30.01.2026</div><div class="member-school">IIS "Don L. Milani" di Gragnano</div><div class="member-location">Gragnano (Na), Italy</div></div><div class="member-card"><div class="member-name">Anna Bukwarow</div><div class="member-role">Administrator</div><div class="member-date">Last access 14.04.2026</div><div class="member-school">LO im. Stefana Banacha w Żaganiu</div><div class="member-location">Żagań, Poland</div></div><div class="member-card"><div class="member-name">Nagore Barbero</div><div class="member-role">Administrator</div><div class="member-date">Last access 29.04.2026</div><div class="member-school">IES BOTIKAZAR BHI</div><div class="member-location">Bilbao, Spain</div></div></div>`
             };
-            document.getElementById('contentArea').innerHTML = content[section] || content.home;
+            document.getElementById('contentArea').innerHTML = content[section];
         }
-
+        
         function showGallery() {
             document.getElementById('contentArea').innerHTML = `<h1 class="content-title">Project Gallery</h1><div class="gallery-grid" id="galleryGrid"></div>`;
             const galleryData = ['gallery6.jpg','gallery1.jpg','gallery2.jpg','gallery3.jpeg','gallery4.jpg','gallery5.jpeg','screenshot1.png','screenshot2.png','screenshot3.png','infographic2.png','infographic3.png','infographic4.png'];
@@ -682,29 +224,21 @@
             galleryData.forEach(img => { grid.innerHTML += `<div class="gallery-item" data-full="${img}"><img src="${img}" loading="lazy"><div class="gallery-overlay"><div class="gallery-title">Picture: ${img}</div></div></div>`; });
             setTimeout(() => { document.querySelectorAll('.gallery-item').forEach(i=>{i.style.opacity='1';i.style.transform='translateY(0)';i.addEventListener('click',()=>{document.getElementById('lightbox-img').src=i.dataset.full;document.getElementById('lightbox').classList.add('active');});}); },100);
         }
-
-        function openMaterial(type, url, title) { if(url && url!='#') window.open(url,'_blank'); }
-
+        
+        function openMaterial(url) { if(url && url!='#') window.open(url,'_blank'); }
+        
         document.querySelectorAll('.team-item').forEach(team => team.addEventListener('click', function() {
-            const id = this.dataset.material, type = this.dataset.type;
+            const type = this.dataset.type;
             const materialsMap = {
-                'mixed1':[{type:'canva',icon:'📱',title:'Presentation',url:'https://www.canva.com/design/DAGyaQahhJU/edit'}],
-                'mixed2':[{type:'canva',icon:'📱',title:'Presentation',url:'https://www.canva.com/design/DAGyZw93F5Q/edit'}],
-                'mixed3':[{type:'canva',icon:'📱',title:'Presentation',url:'https://www.canva.com/design/DAGx_5Xm1w0/view'}],
-                'mixed4':[{type:'canva',icon:'📱',title:'Presentation',url:'https://www.canva.com/design/DAGyaM83peU/view'}],
-                'groups':[{type:'text',icon:'👥',title:'International Groups',desc:'7 Teams with members from FR,PL,TR,MD,SP,IT,AL',url:'#'}],
-                'slides':[{type:'google-slides',icon:'📊',title:'Slides',url:'https://docs.google.com/presentation/d/1yzG6SS2mAi9aBCiBRBBJE8kMQKIxfIxL9jSh2YhzOoI/embed'}],
-                'xmas':[{type:'image',icon:'📬',title:'XMas Card',url:'screenshot1.png'}],
-                'reenact-video':[{type:'youtube',icon:'🎥',title:'Reenactment',url:'https://www.youtube.com/watch?v=e-g-4_PAGLo'}],
-                'presentation':[{type:'youtube',icon:'🎥',title:'Women\'s Day Video',url:'https://www.youtube.com/embed/9igzhMZDwRg'}],
-                'mini-video':[{type:'drive',icon:'🎥',title:'Mini Campaign Video',url:'https://drive.google.com/file/d/1I9uA7PwcMaobhIe0Ns_MCfEzSi2OylXi/view'}],
-                'promo-ebook':[{type:'bookcreator',icon:'📖',title:'eBook',url:'https://read.bookcreator.com/guabWq9i56WoAWOxIVYLOdmXMQf1/PcytJIBRRu6GK_jdr8rytw'}],
-                'promo-video':[{type:'youtube',icon:'🎥',title:'Promo Video',url:'https://youtu.be/_WCCjW4j_tA'}],
-                'promo-website':[{type:'link',icon:'🌐',title:'Website',url:'https://etwinningaristotel26.github.io'}],
-                'promo-vr':[{type:'link',icon:'🕶️',title:'VR Museum',url:'https://metasteps.com/viewer/80dc8861-833c-41c7-8c3a-2df4598bc87b'}],
-                'promo-games':[{type:'link',icon:'🎮',title:'Games',url:'https://wayground.com/admin/quiz/69ce0893288de4679c3044de'}],
-                'promo-infographic':[{type:'text',icon:'🖼️',title:'Infographic',desc:'Coming soon',url:'#'}],
-                'logo':[{type:'text',icon:'🎨',title:'Logo',desc:'Coming soon',url:'#'}],
+                'group1':[{type:'text',icon:'👥',title:'Group 1',desc:'FRemeline, FRLouise, FRMarion, PLMarek, PLBartek, PLMaks, TrAdem,TrEbrar,TrEylül,TrEmre, MdAlexandr, MdCrina, MdAlexandru-Sebastian, SpLucia, SpClaudiaH, SpLeyreG, SpAdrián, Bellotti E., Tramontano A., De Felice Nicola, Al Renald Metaliu, Al Neldison Selman, Al Rudina Çera, Dejvi Pashaj',url:'#'}],
+                'group2':[{type:'text',icon:'👥',title:'Group 2',desc:'FRSacha, FRMéliane, FREmy, FRLana, PLSzymon, PLIgor, TrElisa,TrElif,TrEfe, MdAnastasia, MdDumitra, MdIlina, SpOier, SpAnder, SpMartín, SpJon, Buonocore G., De Martino L., Al Dzeneta Liharevic, Al Lorina Koldashi, Al Peço Peçi, Al Klisman Nika, Al Blerta Cangu, Al Rudina Peqini',url:'#'}],
+                'group3':[{type:'text',icon:'👥',title:'Group 3',desc:'FR Célia, FRRosalie, FRElisabeth, PLKuba, PLMaciek, TrHilal,TrLatife, TrMelike,Trbeste, MdMirela, MdMaria, MdRemus, SpNerea, SpAne, SpAila, SpIzadi, Liguorano Fr, Scarfato M., Al Artemisa Çitozi, Al Aurora Dautaj, Al Smerald Sallahu, Al Elidjon Polena, Al Laureta Mema',url:'#'}],
+                'group4':[{type:'text',icon:'👥',title:'Group 4',desc:'FRCharlyne, FRKetsia, FRAlisa, PLElena, PLKarolina, TrCeren,TrEflal,TrKaplan, MdAlexandru, MdDamian, MdDumitru, SpOihane, SpAlain, SpIker, SpEneko, Castellano N., Galia Fr., Al Hava Qerimi, Al Melisa Killo, Al Marina Ferollari, Al Erida Isaku, Al Tea Muca, Al Vilma Dushaj',url:'#'}],
+                'group5':[{type:'text',icon:'👥',title:'Group 5',desc:'FRClément, FRAppollinariia, FRVladislava, FRFaustine, PLMagda, PLJulia, TrSelenga,TrEbru,TrEcrin, TrBeril, MdAndra, MdLoredana, MdAna, SpIrene, SpLeireM, SpJulene, SpCloé, Guida R., Donnarumma G., Al Zhaklina Xhabafti, Al Denis Duro, Al Egzon Aliu, Al Joel Dervishi',url:'#'}],
+                'group6':[{type:'text',icon:'👥',title:'Group 6',desc:'FROctave, FRLouis, FRElyes, PLAlicja, PLEmilka, TrÇiğdem,TrRabia,TrHamide,TrMukaddes, MdRazvan, MdSofia, MdAlexandra, SpElaia, SpAinhoa, SpClaudiaS, SpArkaitz, Calabrese N., Cascone Y., Al Kles Ruçi, Al Mirela Elmazi, Al Rudina Tahiri, Al Mimoza Çota, Al Marsela Hadaj, Al Vito Heqimaj',url:'#'}],
+                'group7':[{type:'text',icon:'👥',title:'Group 7',desc:'FRZélie, FRFleur, FRLéna, PLZuzia, PLPatrycja, TrDamla,TrZeren,TrGül,TrCennet, TrHüma, MdSebastian, MdMadalina, MdBogdan, SpMiky, SpAlex, SpJokin, SpJune, Core G., Fontanella C., Somma T., Al Erikson Gjidiaj, Al Mirela Kamberi, Al Flogert Hajdari, Al Fidan Mustafa',url:'#'}],
+                'mixed1':[{type:'canva',icon:'📱',title:'Presentation',url:'https://www.canva.com/design/DAGyaQahhJU/edit'}], 'mixed2':[{type:'canva',icon:'📱',title:'Presentation',url:'https://www.canva.com/design/DAGyZw93F5Q/edit'}], 'mixed3':[{type:'canva',icon:'📱',title:'Presentation',url:'https://www.canva.com/design/DAGx_5Xm1w0/view'}], 'mixed4':[{type:'canva',icon:'📱',title:'Presentation',url:'https://www.canva.com/design/DAGyaM83peU/view'}],
+                'slides':[{type:'google-slides',icon:'📊',title:'Slides',url:'https://docs.google.com/presentation/d/1yzG6SS2mAi9aBCiBRBBJE8kMQKIxfIxL9jSh2YhzOoI/embed'}], 'xmas':[{type:'image',icon:'📬',title:'XMas Card',url:'screenshot1.png'}], 'reenact-video':[{type:'youtube',icon:'🎥',title:'Reenactment',url:'https://www.youtube.com/watch?v=e-g-4_PAGLo'}], 'presentation':[{type:'youtube',icon:'🎥',title:'Women\'s Day Video',url:'https://www.youtube.com/embed/9igzhMZDwRg'}], 'mini-video':[{type:'drive',icon:'🎥',title:'Mini Campaign Video',url:'https://drive.google.com/file/d/1I9uA7PwcMaobhIe0Ns_MCfEzSi2OylXi/view'}], 'promo-ebook':[{type:'bookcreator',icon:'📖',title:'eBook',url:'https://read.bookcreator.com/guabWq9i56WoAWOxIVYLOdmXMQf1/PcytJIBRRu6GK_jdr8rytw'}], 'promo-video':[{type:'youtube',icon:'🎥',title:'Promo Video',url:'https://youtu.be/_WCCjW4j_tA'}], 'promo-website':[{type:'link',icon:'🌐',title:'Website',url:'https://etwinningaristotel26.github.io'}], 'promo-vr':[{type:'link',icon:'🕶️',title:'VR Museum',url:'https://metasteps.com/viewer/80dc8861-833c-41c7-8c3a-2df4598bc87b'}], 'promo-games':[{type:'link',icon:'🎮',title:'Games',url:'https://wayground.com/admin/quiz/69ce0893288de4679c3044de'}], 'promo-infographic':[{type:'text',icon:'🖼️',title:'Infographic',desc:'Coming soon',url:'#'}], 'logo':[{type:'text',icon:'🎨',title:'Logo',desc:'Coming soon',url:'#'}],
                 'etwinning-team1':[{type:'canva',icon:'📊',title:'Product 1 - Presentation',url:'https://canva.link/hg2cntt23id9hbb'},{type:'image',icon:'🖼️',title:'Product 2 - Image',url:'screenshot1.png'},{type:'drive',icon:'🎥',title:'Product 3 - Video',url:'https://drive.google.com/file/d/1ukINQNJVv1z0ISSpokr2M6GfqN_gO3n8/view'}],
                 'etwinning-team2':[{type:'canva',icon:'📊',title:'Product 1 - Presentation',url:'https://canva.link/t7wemuoszx8up6n'},{type:'drive',icon:'📁',title:'Product 2 - Folder',url:'https://drive.google.com/drive/folders/1Nk7hpe4E40nsU-ORIpvV5J2PbB08Pgnn'},{type:'youtube',icon:'🎥',title:'Product 3 - Video',url:'https://youtu.be/AxC736VmRBM'}],
                 'etwinning-team3':[{type:'drive',icon:'📄',title:'Product 1 - Presentation PDF',url:'https://drive.google.com/file/d/1uBt1i9cF6NdI86YSjpGt4cMH_FkmuEQu/view'},{type:'drive',icon:'📁',title:'Product 2 - Folder',url:'https://drive.google.com/drive/folders/1UR-EacsLK4wF-w9GTWvo8pWGfoo_Q107'},{type:'drive',icon:'🎥',title:'Product 3 - Video',url:'https://drive.google.com/file/d/1FYyk5ant41hf-Rs50afUF_sHMJN_aixv/view'}],
@@ -713,27 +247,30 @@
                 'unavailable':[{type:'text',icon:'⏳',title:'Unavailable',desc:'Content not yet published',url:'#'}],
                 'conference-screenshots':[{type:'image',icon:'📸',title:'Conference Image 1',url:'screenshot1.png'},{type:'image',icon:'📸',title:'Conference Image 2',url:'screenshot2.png'},{type:'kahoot',icon:'🎮',title:'Kahoot Quiz',url:'https://create.kahoot.it/share/duplicate-of-duplicate-of-enter-kahoot-title/3a32f9b4-b50d-4cc7-8b81-0fdc08320da5'},{type:'image',icon:'🖼️',title:'Conference Image 3',url:'screenshot3.png'}]
             };
-            let materials = materialsMap[type] || materialsMap[id] || [{type:'text',icon:'📂',title:'Content',desc:'Loading...',url:'#'}];
+            let materials = materialsMap[type] || [{type:'text',icon:'📂',title:'Content',desc:'Loading...',url:'#'}];
             let html = `<h1 class="content-title">${this.textContent.trim()}</h1><div class="materials-grid">`;
-            materials.forEach(m => { html += `<div class="material-card" onclick="openMaterial('${m.type}','${m.url}','${m.title}')"><div class="material-icon">${m.icon}</div><h3 class="material-title">${m.title}</h3><p class="material-desc">${m.desc||'Click to open'}</p></div>`; });
+            materials.forEach(m => { html += `<div class="material-card" onclick="openMaterial('${m.url}')"><div class="material-icon">${m.icon}</div><h3 class="material-title">${m.title}</h3><p class="material-desc">${m.desc||'Click to open'}</p></div>`; });
             html += `</div>`;
             document.getElementById('contentArea').innerHTML = html;
         }));
-
+        
         document.addEventListener('click', function(e) {
             const topicButton = e.target.closest('.topic-button');
             if(topicButton) {
                 e.stopPropagation();
                 const topicItem = topicButton.closest('.topic-item');
-                const isOpen = topicItem.classList.contains('open');
-                // Do NOT auto-close siblings - allow independent toggling
-                if(!isOpen) topicItem.classList.add('open');
-                else topicItem.classList.remove('open');
+                const parentList = topicItem.closest('.teams-list');
+                if(parentList) {
+                    parentList.querySelectorAll('.topic-item.open').forEach(item => { if(item !== topicItem) item.classList.remove('open'); });
+                }
+                topicItem.classList.toggle('open');
             }
+            const navTitle = e.target.closest('.nav-title[data-section="pages"]');
+            if(navTitle) navTitle.closest('.nav-item').classList.toggle('open');
         });
         
-        document.querySelectorAll('.nav-title[data-section="pages"]').forEach(btn => btn.addEventListener('click', () => btn.closest('.nav-item').classList.toggle('open')));
         document.querySelector('.lightbox-close').addEventListener('click',()=>{document.getElementById('lightbox').classList.remove('active');});
+        document.querySelectorAll('.nav-title').forEach((btn,idx) => { if(idx===0) btn.classList.add('active'); });
         showMainSection('home');
         window.addEventListener('scroll',()=>{const st=window.pageYOffset, dh=document.documentElement.scrollHeight-window.innerHeight; document.getElementById('scrollProgress').style.height=(st/dh*100)+'%';});
     </script>
